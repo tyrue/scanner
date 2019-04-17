@@ -1,0 +1,11 @@
+extends layout
+
+block content
+  h1= title
+  table
+    tr
+      - for i in datas
+          td= i
+  p
+  a(href="./") home
+  p #{time}
