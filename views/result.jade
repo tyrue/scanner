@@ -2,10 +2,23 @@ extends layout
 
 block content
   h1= title
-  table(border = 1)
+  h3 테이블
+  table(border = 4)
     tr
-      - for i in datas
-          td= i
+      td #
+      td id
+      td type
+      td uuid
+      td mac
+      td mjid(vBatt)
+      td mnid(Tempature)
+      td rssi(adv pdu count)
+      td txpw
+      td time
+    - for(var i = 0; i < datas.length; i++)
+      tr
+        - for j in datas[i]
+            td= j
   p
-  a(href="./") home
+  a(href="./") home으로 가기
   p #{time}

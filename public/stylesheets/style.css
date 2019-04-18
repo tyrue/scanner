@@ -8,7 +8,10 @@ a {
 }
 
 table{
-  background: #00B7FF;
-  border-width: 10;
-  border-color: black;
+  text-align: center;
+  width: 100%;
+}
+
+tr{
+  width: 100%;
 }

@@ -1,6 +1,6 @@
 var db = require('./db');
+var day = require('./date');
 var IB_table = "scanner_ib";
-var ET_table = "scanner_et";
 
 exports.sendAlive = function (req, res) {
     var post = req.body;
@@ -9,27 +9,30 @@ exports.sendAlive = function (req, res) {
 
 exports.sendSignal = function (req, res) {
     var post = req.body;
-    if (post[0].type === 'IB') {
+    day = new Date();
+    day = day.format("yyyy-MM-dd a/p hh:mm:ss");
+    if (post[0].type === "IB") {
         console.log("IB action");
+        //console.log(post);
         /*
         db.query(`
-            INSERT INTO ${IB_table} (id, type, uuid, mac, mjid, mnid, rssi, txpw) 
-            VALUES(?, ?, ?, ?, ?, ?, ?, ?);`, 
-            [post[0].scid, post[0].type, post[0].uuid, post[0].mac, post[0].mjid, post[0].mnid, post[0].rssi, post[0].txpw],
+        INSERT INTO ${IB_table} (id, type, uuid, mac, mjid_batt, mnid_temp, rssi_adv, txpw, time) 
+        VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?);`,
+            [post[0].scid, post[0].type, post[0].uuid, post[0].mac, post[0].mjid, post[0].mnid, post[0].rssi, post[0].txpw, day],
             function (error, result) {
                 if (error) {
                     throw error;
                 }
             }
         );*/
-        
-    } else if (post[0].type === 'ET') {
+    } else if (post[0].type === "ET") {
         console.log("ET action");
+        console.log(post);
         /*
         db.query(`
-            INSERT INTO ${IB_table} (id, type, mac, batt, temp, advc, sinc) 
-            VALUES(?, ?, ?, ?, ?, ?, ?, ?);`,
-            [post[0].scid, post[0].type, post[0].mac, post[0].batt, post[0].temp, post[0].advc, post[0].sinc],
+        INSERT INTO ${IB_table} (id, type, uuid, mac, mjid_batt, mnid_temp, rssi_adv, time) 
+        VALUES(?, ?, ?, ?, ?, ?, ?, ?);`,
+            [post[0].scid, post[0].type, post[0].mac, post[0].mac, post[0].batt, post[0].temp, post[0].advc, day],
             function (error, result) {
                 if (error) {
                     throw error;
@@ -40,16 +43,16 @@ exports.sendSignal = function (req, res) {
 }
 
 exports.result = function (req, res) {
-    var data;
     db.query(`select * from ${IB_table}`, function (error, result) {
         if (error) {
             throw error;
         }
-        for(var i in result[0])
-        {
-            console.log(i);
-        }
-        data = result[0];
-        res.render('result', { title: 'result', datas: data, time: Date() });
+        day = new Date();
+        day = day.format("yyyy-MM-dd a/p hh:mm:ss");
+        res.render('result', {
+            title: 'result',
+            datas: result,
+            time: day
+        });
     });
 }

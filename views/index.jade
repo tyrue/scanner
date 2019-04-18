@@ -3,6 +3,14 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
-  a(href="./result") result
+  a(href="./result") result페이지로 가기
+  p
+  form(action="./sendAlive", method="post")
+    input(type="text", name="name")
+    input(type="submit", value="sendAlive")
+  p
+  form(action="./sendSignal", method="post")
+    input(type="text", name="name")
+    input(type="submit", value="sendSignal")
   p #{time}
 
