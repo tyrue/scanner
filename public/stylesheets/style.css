@@ -9,12 +9,6 @@ a {
 
 table{
   background: #00B7FF;
-  border-width: 0;
-  border: 1;
+  border-width: 10;
   border-color: black;
-  border-collapse: separate;
-}
-
-tbody{
-  border: 1;
 }
