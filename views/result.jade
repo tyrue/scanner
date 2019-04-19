@@ -1,10 +1,41 @@
 extends layout
 
 block content
+  form(action="./result", method="post")
+    table
+      tr  
+        td SCANNER_ID
+        td MAJOR_ID
+        td MINOR_ID
+        td(rowspan = 2)
+          input(type="submit" value="검색하기")
+      tr
+        td
+          input(type="text", name="scan_id")
+        td
+          input(type="text", name="major_id")
+        td
+          input(type="text", name="minor_id")
+      tr
+        td 시작 시간
+        td 종료 시간
+        td UUID
+        td MAC_ADDRESS
+      tr
+        td
+          input(type="text", name="start_time" placeholder="YYY-MM-DD HH:mm:ss")
+        td
+          input(type="text", name="end_time" placeholder="YYY-MM-DD HH:mm:ss")
+        td
+          input(type="text", name="uuid" )
+        td
+          input(type="text", name="mac" )
+
   h1= title
-  h3 테이블
+  h3 결과 테이블 조회 결과 &nbsp;&nbsp; #{time}
+  a(href="./") home으로 가기
   table
-    tr
+    thead
       td #
       td id
       td type
@@ -20,5 +51,4 @@ block content
         - for j in datas[i]
             td= j
   p
-  a(href="./") home으로 가기
-  p #{time}
+  

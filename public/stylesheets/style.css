@@ -7,19 +7,23 @@ a {
   color: #00B7FF;
 }
 
-table {
+table, td{
   text-align: center;
-  width: 100%;
   border-collapse: collapse;
   border: 2px solid #000000;
+  padding: 7px;
 }
 
-tr{
+table, tr{
   width: 100%;
   border: 2px solid #000000;
 }
 
-td{
-  border: 2px solid #000000;
-  font-size: 14px;
+table{
+  font-size: 15px;
+}
+
+thead{
+  font-size: 20px;
+  font-weight: bold
 }

@@ -32,7 +32,7 @@ exports.sendSignal = function (req, res) {
         db.query(`
         INSERT INTO ${IB_table} (id, type, uuid, mac, mjid_batt, mnid_temp, rssi_adv, time) 
         VALUES(?, ?, ?, ?, ?, ?, ?, ?);`,
-            [post[0].scid, post[0].type, post[0].mac, post[0].mac, post[0].batt, post[0].temp, post[0].advc, day],
+            [post[0].scid, post[0].type, post[0].mac, post[0].mac, `${post[0].batt} mv`, `${post[0].temp} ℃`, post[0].advc, day],
             function (error, result) {
                 if (error) {
                     throw error;
@@ -43,7 +43,10 @@ exports.sendSignal = function (req, res) {
 }
 
 exports.result = function (req, res) {
-    db.query(`select * from ${IB_table} order by scan_num desc`, function (error, result) {
+    var post = req.body;
+    console.log(post);
+    db.query(`select * from ${IB_table} where id like "%${post.scan_id}%" and mjid_batt like "%${post.major_id}%" and mnid_temp like "%${post.minor_id}%"
+        order by scan_num desc`, function (error, result) {
         if (error) {
             throw error;
         }

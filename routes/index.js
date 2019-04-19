@@ -10,17 +10,16 @@ router.get('/', function(req, res, next) {
 router.get('/result', function(req, res, next) {
   scanner.result(req, res);
 });
+router.post('/result', function(req, res, next) {
+  scanner.result(req, res);
+});
 router.post('/scanner/sendAlive', function(req, res, next) {
-  var post = req.body;
-  //console.log(post);
   scanner.sendAlive(req, res);
-  res.render('send', {name: post.name});
+  res.render('send');
 });
 router.post('/scanner/sendSignal', function(req, res, next) {
-  var post = req.body;
-  //console.log(post);
   scanner.sendSignal(req, res);
-  res.render('send', {name: post.name});
+  res.render('send');
 });
 
 module.exports = router;
