@@ -43,7 +43,7 @@ exports.sendSignal = function (req, res) {
 }
 
 exports.result = function (req, res) {
-    db.query(`select * from ${IB_table}`, function (error, result) {
+    db.query(`select * from ${IB_table} order by scan_num desc`, function (error, result) {
         if (error) {
             throw error;
         }

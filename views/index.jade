@@ -5,11 +5,11 @@ block content
   p Welcome to #{title}
   a(href="./result") result페이지로 가기
   p
-  form(action="./sendAlive", method="post")
+  form(action="/sendAlive", method="post")
     input(type="text", name="name")
     input(type="submit", value="sendAlive")
   p
-  form(action="./sendSignal", method="post")
+  form(action="/sendSignal", method="post")
     input(type="text", name="name")
     input(type="submit", value="sendSignal")
   p #{time}
