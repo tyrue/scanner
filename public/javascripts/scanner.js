@@ -45,17 +45,36 @@ exports.sendSignal = function (req, res) {
 exports.result = function (req, res) {
     var post = req.body;
     console.log(post);
-    db.query(`select * from ${IB_table} where id like "%${post.scan_id}%" and mjid_batt like "%${post.major_id}%" and mnid_temp like "%${post.minor_id}%"
+    if (Object.keys(post).length === 0) {
+        console.log("null");
+        db.query(`select * from ${IB_table} 
         order by scan_num desc`, function (error, result) {
-        if (error) {
-            throw error;
-        }
-        day = new Date();
-        day = day.format("yyyy-MM-dd a/p hh:mm:ss");
-        res.render('result', {
-            title: 'result',
-            datas: result,
-            time: day
+            if (error) {
+                throw error;
+            }
+            day = new Date();
+            day = day.format("yyyy-MM-dd a/p hh:mm:ss");
+            res.render('result', {
+                title: 'result',
+                datas: result,
+                time: day
+            });
         });
-    });
+    } else {
+        console.log("not null");
+        db.query(`select * from ${IB_table} 
+            where id like "%${post.scan_id}%" and mjid_batt like "%${post.major_id}%" and mnid_temp like "%${post.minor_id}%" and uuid like "%${post.uuid}%" and mac like "%${post.mac}%"
+            order by scan_num desc`, function (error, result) {
+            if (error) {
+                throw error;
+            }
+            day = new Date();
+            day = day.format("yyyy-MM-dd a/p hh:mm:ss");
+            res.render('result', {
+                title: 'result',
+                datas: result,
+                time: day
+            });
+        });
+    }
 }
