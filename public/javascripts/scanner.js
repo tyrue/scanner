@@ -13,7 +13,7 @@ exports.sendSignal = function (req, res) {
     day = day.format("yyyy-MM-dd a/p hh:mm:ss");
     if (post[0].type === "IB") {
         console.log("IB action");
-        //console.log(post);
+        console.log(post);
         /*
         db.query(`
         INSERT INTO ${IB_table} (id, type, uuid, mac, mjid_batt, mnid_temp, rssi_adv, txpw, time) 
